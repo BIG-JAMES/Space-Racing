@@ -59,15 +59,5 @@ namespace Space_Racing.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] sounds {
-            get {
-                object obj = ResourceManager.GetObject("sounds", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }
