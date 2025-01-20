@@ -46,9 +46,10 @@
             // player1sp
             // 
             this.player1sp.Image = ((System.Drawing.Image)(resources.GetObject("player1sp.Image")));
-            this.player1sp.Location = new System.Drawing.Point(90, 107);
+            this.player1sp.Location = new System.Drawing.Point(68, 87);
+            this.player1sp.Margin = new System.Windows.Forms.Padding(2);
             this.player1sp.Name = "player1sp";
-            this.player1sp.Size = new System.Drawing.Size(70, 70);
+            this.player1sp.Size = new System.Drawing.Size(52, 57);
             this.player1sp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.player1sp.TabIndex = 0;
             this.player1sp.TabStop = false;
@@ -56,24 +57,26 @@
             // player2sp
             // 
             this.player2sp.Image = ((System.Drawing.Image)(resources.GetObject("player2sp.Image")));
-            this.player2sp.Location = new System.Drawing.Point(436, 121);
+            this.player2sp.Location = new System.Drawing.Point(327, 98);
+            this.player2sp.Margin = new System.Windows.Forms.Padding(2);
             this.player2sp.Name = "player2sp";
-            this.player2sp.Size = new System.Drawing.Size(70, 70);
+            this.player2sp.Size = new System.Drawing.Size(52, 57);
             this.player2sp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.player2sp.TabIndex = 1;
             this.player2sp.TabStop = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(782, 453);
+            this.ClientSize = new System.Drawing.Size(586, 368);
             this.Controls.Add(this.player2sp);
             this.Controls.Add(this.player1sp);
             this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "asda";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);

@@ -4,32 +4,44 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+
 
 namespace Space_Racing
 {
     public partial class Form1 : Form
     {
-        Rectangle player1 = new Rectangle(130, 300, 40, 40);
-        Rectangle player2 = new Rectangle(430, 300, 40, 40);
-        Rectangle midline = new Rectangle(300, 0, 2, 802);
+        //soundPlayer
+        SoundPlayer soundPlayer = new SoundPlayer();
 
-
-        List<Rectangle> ball = new List<Rectangle>();
-        List<int> ballspeed = new List<int>();
-
-        int ballSize = 10;
-
-
-
+        //drawing
         SolidBrush WhiteBrush = new SolidBrush(Color.White);
         SolidBrush blackBrush = new SolidBrush(Color.Black);
+        Rectangle midline = new Rectangle(300, 0, 2, 802);
 
-        int player1Speed = 5;
-        int player2Speed = 5;
+        //balls
+        List<Rectangle> ball = new List<Rectangle>();
+        List<int> ballspeed = new List<int>();
+        List<Rectangle> ball2 = new List<Rectangle>();
+        List<int> ball2speed = new List<int>();
 
+        int ballSize = 10;
+        int ball2Size = 10;
+
+        Random Randomgener = new Random();
+        int ranValue = 0;
+
+        //player1 & player2
+        Rectangle player1 = new Rectangle(130, 300, 40, 40);
+        Rectangle player2 = new Rectangle(430, 300, 40, 40);
+
+        int player1Speed = 6;
+        int player2Speed = 6;
         int player1Score = 0;
         int player2Score = 0;
 
@@ -38,9 +50,7 @@ namespace Space_Racing
         bool upPressed = false;
         bool downPressed = false;
 
-        Random Randomgener = new Random();
-        int ranValue = 0;
-
+        //player key imputs
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -83,9 +93,17 @@ namespace Space_Racing
             }
         }
 
-        private void gameTime_Tick(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
 
+            this.Text = Text;
+            //music
+            //soundPlayer = new SoundPlayer(Properties.Resources.);
+            //soundPlayer.Play();
+        }
+
+        private void gameTime_Tick(object sender, EventArgs e)
+        {
             //players size & sprites
             player1sp.Location = player1.Location;
             player1.Size = player1sp.Size;
@@ -117,19 +135,42 @@ namespace Space_Racing
 
             int ranValue = Randomgener.Next(0, 90);
 
-            if (ranValue < 40)
+            //ball movement
+            if (ranValue < 15)
             {
-                int size = Randomgener.Next(5, 10);
+                int size = Randomgener.Next(1, 5);
                 int Y = Randomgener.Next(23, this.Width);
                 Rectangle newBall = new Rectangle(0, Y, ballSize, ballSize);
                 ball.Add(newBall);
-                ballspeed.Add(Randomgener.Next(4, 16));
+                ballspeed.Add(Randomgener.Next(2, 6));
             }
 
             for (int i = 0; i < ball.Count; i++)
             {
                 int x = ball[i].X + ballspeed[i];
                 ball[i] = new Rectangle(x, ball[i].Y, ball[i].Width, ball[i].Height);
+            }
+
+            //balls going backwords
+            if (ranValue < 15)
+            {
+                int size = Randomgener.Next(1, 5);
+                int Y = Randomgener.Next(23, this.Width);
+                Rectangle newBall2 = new Rectangle(602, Y, ball2Size, ball2Size);
+                ball2.Add(newBall2);
+                ball2speed.Add(Randomgener.Next(2, 6));
+            }
+
+            for (int i = 0; i < ball2.Count; i++)
+            {
+                int x = ball2[i].X - ball2speed[i];
+                ball2[i] = new Rectangle(x, ball2[i].Y, ball2[i].Width, ball2[i].Height);
+            }
+
+            //geting hit by balls
+            //if (player2.IntersectsWith(ball2))
+            {
+                player2.Y = 300;
             }
 
             //bottom wall
@@ -142,14 +183,31 @@ namespace Space_Racing
                 player2.Y = 299;
             }
 
+            //gaining points
+            if (player1.Y < 1)
+            {
+                player1Score++;
+                player1.Y = 300;
+                player2.Y = 300;
+            }
+            if (player2.Y < 1)
+            {
+                player2Score++;
+                player2.Y = 300;
+                player1.Y = 300;
+            }
+
+            Text = $"blue score:{player1Score}                                                                       red score:{player2Score}";
             if (player1Score == 5)
             {
-
+                Text = $"                                                              blue wins red could not keep up";
+                gameTime.Enabled = false;
             }
 
             if (player2Score == 5)
             {
-
+                Text = $"red wins blue could not keep up";
+                gameTime.Enabled = false;
             }
 
             Refresh();
@@ -166,16 +224,17 @@ namespace Space_Racing
             {
                 e.Graphics.FillRectangle(WhiteBrush, ball[i]);
             }
+
+            for (int i = 0; i < ball2.Count; i++)
+            {
+                e.Graphics.FillRectangle(WhiteBrush, ball2[i]);
+            }
         }
 
         public Form1()
         {
+
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
