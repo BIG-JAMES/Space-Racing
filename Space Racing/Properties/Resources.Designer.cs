@@ -59,5 +59,23 @@ namespace Space_Racing.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2015_09_25___Old_Video_Game_Music_1___David_Fesliyan__2_ {
+            get {
+                return ResourceManager.GetStream("_2015_09_25___Old_Video_Game_Music_1___David_Fesliyan__2_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream level_win_6416 {
+            get {
+                return ResourceManager.GetStream("level_win_6416", resourceCulture);
+            }
+        }
     }
 }

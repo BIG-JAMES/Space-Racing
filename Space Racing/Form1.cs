@@ -95,11 +95,30 @@ namespace Space_Racing
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //helps display points in the form name
             this.Text = Text;
+
             //music
-            //soundPlayer = new SoundPlayer(Properties.Resources.);
-            //soundPlayer.Play();
+            soundPlayer = new SoundPlayer(Properties.Resources._2015_09_25___Old_Video_Game_Music_1___David_Fesliyan__2_);
+            soundPlayer.PlayLooping();
+        }
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            //drawing 
+            e.Graphics.FillRectangle(blackBrush, player1);
+            e.Graphics.FillRectangle(blackBrush, player2);
+            e.Graphics.FillRectangle(WhiteBrush, midline);
+
+            //draw astroid 
+            for (int i = 0; i < ball.Count; i++)
+            {
+                e.Graphics.FillRectangle(WhiteBrush, ball[i]);
+            }
+
+            for (int i = 0; i < ball2.Count; i++)
+            {
+                e.Graphics.FillRectangle(WhiteBrush, ball2[i]);
+            }
         }
 
         private void gameTime_Tick(object sender, EventArgs e)
@@ -136,10 +155,10 @@ namespace Space_Racing
             int ranValue = Randomgener.Next(0, 90);
 
             //ball movement
-            if (ranValue < 15)
+            if (ranValue < 5)
             {
                 int size = Randomgener.Next(1, 5);
-                int Y = Randomgener.Next(23, this.Width);
+                int Y = Randomgener.Next(23, this.Width - 340);
                 Rectangle newBall = new Rectangle(0, Y, ballSize, ballSize);
                 ball.Add(newBall);
                 ballspeed.Add(Randomgener.Next(2, 6));
@@ -152,10 +171,10 @@ namespace Space_Racing
             }
 
             //balls going backwords
-            if (ranValue < 15)
+            if (ranValue < 5)
             {
                 int size = Randomgener.Next(1, 5);
-                int Y = Randomgener.Next(23, this.Width);
+                int Y = Randomgener.Next(23, this.Width - 340);
                 Rectangle newBall2 = new Rectangle(602, Y, ball2Size, ball2Size);
                 ball2.Add(newBall2);
                 ball2speed.Add(Randomgener.Next(2, 6));
@@ -168,9 +187,27 @@ namespace Space_Racing
             }
 
             //geting hit by balls
-            //if (player2.IntersectsWith(ball2))
+            for (int i = 0; i <ball2.Count; i++)
             {
-                player2.Y = 300;
+                if (player2.IntersectsWith(ball2[i]))
+                {
+                    player2.Y = 300;
+                }
+                if (player1.IntersectsWith(ball2[i]))
+                {
+                    player1.Y = 300;
+                }
+            }
+            for (int i = 0; i < ball.Count; i++)
+            {
+                if (player2.IntersectsWith(ball[i]))
+                {
+                    player2.Y = 300;
+                }
+                if (player1.IntersectsWith(ball[i]))
+                {
+                    player1.Y = 300;
+                }
             }
 
             //bottom wall
@@ -178,6 +215,7 @@ namespace Space_Racing
             {
                 player1.Y = 299;
             }
+
             if (player2.Y > 300)
             {
                 player2.Y = 299;
@@ -202,33 +240,19 @@ namespace Space_Racing
             {
                 Text = $"                                                              blue wins red could not keep up";
                 gameTime.Enabled = false;
+                soundPlayer = new SoundPlayer(Properties.Resources.level_win_6416);
+                soundPlayer.Play();
             }
 
             if (player2Score == 5)
             {
                 Text = $"red wins blue could not keep up";
                 gameTime.Enabled = false;
+                soundPlayer = new SoundPlayer(Properties.Resources.level_win_6416);
+                soundPlayer.Play();
             }
 
             Refresh();
-        }
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            //drawing 
-            e.Graphics.FillRectangle(blackBrush, player1);
-            e.Graphics.FillRectangle(blackBrush, player2);
-            e.Graphics.FillRectangle(WhiteBrush, midline);
-
-            //draw astroid 
-            for (int i = 0; i < ball.Count; i++)
-            {
-                e.Graphics.FillRectangle(WhiteBrush, ball[i]);
-            }
-
-            for (int i = 0; i < ball2.Count; i++)
-            {
-                e.Graphics.FillRectangle(WhiteBrush, ball2[i]);
-            }
         }
 
         public Form1()

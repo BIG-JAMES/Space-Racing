@@ -86,5 +86,11 @@
   <ItemGroup>
     <None Include="Resources\sounds.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2015-09-25_-_Old_Video_Game_Music_1_-_David_Fesliyan %282%29.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level-win-6416.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
